@@ -11,4 +11,4 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'catalizator'
+rootProject.name = 'webflux_jwt'
