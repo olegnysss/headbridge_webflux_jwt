@@ -1,0 +1,36 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: spring-webflux
+  webflux:
+    base-path: /api
+  data:
+    mongodb:
+      authentication-database: admin
+      uri: mongodb://localhost:27017/test
+      database: test
+      auto-index-creation: true
+
+server:
+  port: 8080
+  http2:
+    enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+        data:
+          mongodb:
+            core:
+              ReactiveMongoTemplate: DEBUG
+    reactor:
+      netty:
+        http:
+          client: DEBUG
+
+jwt:
+  secret: 0L3Rg9C20LXQvSDQvtGH0LXQvdGMINC00L7Qu9Cz0LjQuSDRgdC10LrRgNC10YIg0L/QvtGC0L7QvNGDINGH0YLQviDQtdGB0LvQuCDRgdC10LrRgNC10YIg0LHRg9C00LXRgiDQutC+0YDQvtGC0LXQvdGM0LrQuNC5INGC0L4g0LHRg9C00LXRgiDQvdC10YHQtdC60YzRjtGA0L3QviEhIQ==
+  expiration: 86400
