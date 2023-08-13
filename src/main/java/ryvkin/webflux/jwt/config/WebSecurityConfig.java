@@ -29,29 +29,31 @@ public class WebSecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity httpSecurity) {
         return httpSecurity
-                .exceptionHandling()
-                .authenticationEntryPoint(
-                        (swe, e) ->
-                                Mono.fromRunnable(
-                                        () -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED)
-                                )
-                )
-                .accessDeniedHandler(
-                        (swe, e) ->
-                                Mono.fromRunnable(
-                                        () -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN)
-                                )
-                )
-                .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .httpBasic().disable()
-                .authenticationManager(authenticationManager)
-                .securityContextRepository(securityContextRepository)
-                .authorizeExchange()
-                .pathMatchers("/login", "/register").permitAll()
-                .anyExchange().authenticated()
-                .and()
-                .build();
+            .exceptionHandling()
+            .authenticationEntryPoint(
+                (swe, e) ->
+                    Mono.fromRunnable(
+                        () -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED)
+                    )
+            )
+            .accessDeniedHandler(
+                (swe, e) ->
+                    Mono.fromRunnable(
+                        () -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN)
+                    )
+            )
+            .and()
+            .csrf().disable()
+            .formLogin().disable()
+            .httpBasic().disable()
+            .authenticationManager(authenticationManager)
+            .securityContextRepository(securityContextRepository)
+            .authorizeExchange()
+            .pathMatchers("/login", "/register").permitAll()
+            .pathMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
+                "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-ui.html").permitAll()
+            .anyExchange().permitAll()
+            .and()
+            .build();
     }
 }
