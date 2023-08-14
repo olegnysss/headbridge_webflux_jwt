@@ -3,7 +3,6 @@ package ryvkin.webflux.jwt.controller;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @RestController
-@OpenAPIDefinition(servers = {@Server(url = "http://localhost:8080")},
+@OpenAPIDefinition(servers = {@Server(url = "http://localhost:8080/api")},
     info = @Info(title = "Sample Spring Boot + WebFlux + Spring Security", version = "v1",
         description = "A demo project for TeachBase Java Senior Course",
         contact = @Contact(url = "https://github.com/olegnysss/", name = "Oleg Ryvkin")))
