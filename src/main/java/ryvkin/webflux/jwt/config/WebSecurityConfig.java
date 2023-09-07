@@ -51,6 +51,8 @@ public class WebSecurityConfig {
             .authorizeExchange()
             .pathMatchers("/login", "/register").permitAll()
             .pathMatchers("/actuator/prometheus").permitAll()
+            .pathMatchers("/v2/api-docs/**", "/v3/api-docs/**", "/configuration/ui", "/swagger-resources", "/configuration/security",
+                "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-ui.html").permitAll()
             .anyExchange().authenticated()
             .and()
             .build();
