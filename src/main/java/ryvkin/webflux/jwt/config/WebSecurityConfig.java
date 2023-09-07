@@ -50,8 +50,7 @@ public class WebSecurityConfig {
             .securityContextRepository(securityContextRepository)
             .authorizeExchange()
             .pathMatchers("/login", "/register").permitAll()
-            .pathMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
-                "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-ui.html").permitAll()
+            .pathMatchers("/actuator/prometheus").permitAll()
             .anyExchange().authenticated()
             .and()
             .build();
