@@ -3,21 +3,21 @@ version: '3.7'
 services:
   webflux:
     build: .
-    restart: always
+    restart: no
     ports:
-      - 8080:8080
+      - "8080:8080"
     links:
       - mongo_db:mongodb
   mongo_db:
     image: "mongo:4.4.3"
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     hostname: mongodb
   grafana:
     build: './scripts/config/grafana'
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./grafana:/var/lib/grafana
     environment:
@@ -30,12 +30,10 @@ services:
   prometheus:
     image: prom/prometheus
     ports:
-      - 9090:9090
+      - "9090:9090"
     volumes:
       - ./scripts/config/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus:/prometheus
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       monitoring:
         aliases:
