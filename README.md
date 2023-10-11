@@ -1,4 +1,4 @@
-# WebFlux project + MongoDB + JWT + Spring Security + Swagger + Prometheus + Grafana + Docker Compose
+# WebFlux project + MongoDB + JWT + Spring Security + Swagger + Prometheus + Grafana + Docker Compose + Kafka
 
 Был добавлен Docker Compose для удобства запуска приложения и сервисов мониторинга. 
 
