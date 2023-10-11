@@ -8,6 +8,17 @@
 docker-compose up --build
 ```
 
+Добавил метрики вида:
+
+* register_counter
+* login_counter
+* failed_login_counter
+
+Также по каждому событию присылается сообщение в кафку в топик auth-events
+
+![counters.png](src%2Fmain%2Fresources%2Fcounters.png)
+![kafka.png](src%2Fmain%2Fresources%2Fkafka.png)
+
 В Grafana были добавлены две дашборды JVM (Micrometer) и Micrometer Spring Throughput
 
 ![spring_micrometer.png](src/main/resources/spring_micrometer.png)

@@ -1,6 +1,5 @@
 package ryvkin.webflux.jwt.controller;
 
-import ryvkin.webflux.jwt.config.JwtUtil;
 import ryvkin.webflux.jwt.domain.User;
 import ryvkin.webflux.jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,25 +18,29 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserController {
     private final static ResponseEntity<Object> UNAUTHORIZED =
-            ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
     private final UserService userService;
-    private final JwtUtil jwtUtil;
 
     @PostMapping("/login")
     public Mono<ResponseEntity> login(ServerWebExchange swe) {
         return swe.getFormData().flatMap(credentials ->
-                userService.findByUsername(credentials.getFirst("username"))
-                        .cast(User.class)
-                        .map(userDetails ->
-                                Objects.equals(
-                                        credentials.getFirst("password"),
-                                        userDetails.getPassword()
-                                )
-                                        ? ResponseEntity.ok(jwtUtil.generateToken(userDetails))
-                                        : UNAUTHORIZED
+            {
+                String username = credentials.getFirst("username");
+                String password = credentials.getFirst("password");
+
+                return userService.findByUsername(username)
+                    .cast(User.class)
+                    .map(userDetails ->
+                        Objects.equals(
+                            password,
+                            userDetails.getPassword()
                         )
-                .defaultIfEmpty(UNAUTHORIZED)
+                            ? userService.successfulLogIn(userDetails)
+                            : userService.unsuccessfullLogIn(username)
+                    )
+                    .defaultIfEmpty(UNAUTHORIZED);
+            }
         );
     }
 
